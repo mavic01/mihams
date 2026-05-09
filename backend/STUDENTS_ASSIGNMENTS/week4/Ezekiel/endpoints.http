@@ -1,0 +1,16 @@
+DELETE http://localhost:3000/delete-task?task=somth
+
+
+GET http://localhost:3000/server-test
+
+POST http://localhost:3000/server-test
+Content-Type: application/json
+{
+    "taskName": "smth"
+}
+
+DELETE http://localhost:3000/server-test
+Content-Type: application/json
+{
+    "taskName": "smth"
+}
