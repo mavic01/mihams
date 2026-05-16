@@ -6,7 +6,7 @@
 ## Submission Rules
 
 - Push your work to GitHub (week6/YOUR_NAME)
-> Id you have book module, just update it (from week5 file). Else, copy base code from existing(victor or ezekiel/library) code and build from there. 
+> Id you have book module, just update it (from week5 file). Else, copy base code from existing(victor) code and build from there. 
 - Raise a pr
 - Your application must run without errors
 - Use proper folder structure
