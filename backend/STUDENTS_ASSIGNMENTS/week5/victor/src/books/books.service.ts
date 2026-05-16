@@ -3,41 +3,32 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-
-import { Book } from 'src/books/interfaces/book.interface';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { Repository } from 'typeorm';
+import { Book } from './book.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class BooksService {
-  books: Book[] = [
-    {
-      id: 1,
-      bookName: 'Pride and Prejudice',
-      author: 'Jane Austen',
-    },
-    {
-      id: 2,
-      bookName: 'Outlander',
-      author: 'Diana Gabaldon',
-    },
-    {
-      id: 3,
-      bookName: 'The Notebook',
-      author: 'Nicholas Sparks',
-    },
-  ];
 
-  viewBooks(): { success: boolean; count: number; data: Book[] } {
+  constructor(
+    @InjectRepository(Book)
+    private readonly bookRepository: Repository<Book>
+  ) {}
+
+  async viewBooks(): Promise<{ success: boolean; count: number; data: Book[] }> {
+    let books = await this.bookRepository.find()
+    
     return {
       success: true,
-      count: this.books.length,
-      data: this.books,
+      count: books.length,
+      data: books,
     };
   }
 
-  viewOneBook(bookId: number): Book {
-    const selectedBook = this.books.find((book) => book.id === bookId);
+  async viewOneBook(bookId: number): Promise<Book> {
+    const selectedBook = await this.bookRepository.findOneBy({ id: bookId });
 
     if (!selectedBook) {
       throw new NotFoundException('Book not found');
@@ -46,28 +37,20 @@ export class BooksService {
     return selectedBook;
   }
 
-  addNewBook(book: CreateBookDto): Book {
-    const existingBook = this.books.find(
-      (existingBook) => existingBook.bookName === book.bookName,
-    );
+  async addNewBook(book: CreateBookDto): Promise<Book> {
+    const existingBook = await this.bookRepository.findOneBy({author: book.author});
     if (existingBook) {
       throw new BadRequestException('Book already exists');
     }
-    const newBookId = this.books[this.books.length - 1].id + 1;
+    let newBook = this.bookRepository.create({...book})
 
-    const newBook: Book = {
-      id: newBookId,
-      bookName: book.bookName,
-      author: book.author,
-    };
-
-    this.books.push(newBook);
+    newBook = await this.bookRepository.save(newBook)
 
     return newBook;
   }
 
-  updateBook(bookId: number, book: UpdateBookDto): Book {
-    const bookToUpdate = this.books.find((book) => book.id === bookId);
+  async updateBook(bookId: number, book: UpdateBookDto): Promise<Book> {
+    const bookToUpdate = await this.bookRepository.findOneBy({id: bookId});
 
     if (!bookToUpdate) {
       throw new NotFoundException('Book not found');
@@ -78,22 +61,17 @@ export class BooksService {
       ...book,
     };
 
-    const updatedBookIndex = this.books.findIndex((book) => book.id === bookId);
-
-    this.books[updatedBookIndex] = updatedBook;
-
     return updatedBook;
   }
 
-  deleteBook(bookId: number): Book[] {
-    const bookToDeleteIndex = this.books.findIndex(
-      (book) => book.id === bookId,
-    );
+  async deleteBook(bookId: number): Promise<Book> {
+    const bookToDelete = await this.bookRepository.findOneBy({id: bookId})
 
-    if (bookToDeleteIndex === -1) {
+    if (!bookToDelete) {
       throw new NotFoundException('Book not found');
     }
 
-    return this.books.splice(bookToDeleteIndex, 1);
+    await this.bookRepository.delete({id: bookId})
+    return bookToDelete;
   }
 }
