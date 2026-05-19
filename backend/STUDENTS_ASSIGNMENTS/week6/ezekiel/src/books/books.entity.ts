@@ -6,6 +6,7 @@ import {
 } from 'typeorm';
 
 import { Users } from '../users/users.entity';
+
 @Entity()
 export class Books {
   @PrimaryGeneratedColumn()
@@ -17,6 +18,9 @@ export class Books {
   @Column()
   author!: string;
 
-  @ManyToOne(() => Users)
+  @ManyToOne(
+    () => Users,
+    (user) => user.books,
+  )
   user!: Users;
 }

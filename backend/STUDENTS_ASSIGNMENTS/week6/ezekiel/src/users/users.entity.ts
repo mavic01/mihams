@@ -1,8 +1,11 @@
 import {
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Book } from '../books/book.entity';
 
 @Entity()
 export class Users {
@@ -15,11 +18,15 @@ export class Users {
   @Column()
   lastname!: string;
 
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true })
   email!: string;
 
   @Column()
   password!: string;
+
+  @OneToMany(
+    () => Book,
+    (book) => book.user,
+  )
+  books!: Book[];
 }
