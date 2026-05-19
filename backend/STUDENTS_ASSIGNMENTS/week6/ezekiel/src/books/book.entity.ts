@@ -21,6 +21,7 @@ export class Book {
   @ManyToOne(
     () => Users,
     (user) => user.books,
+    { onDelete: 'CASCADE' },
   )
   user!: Users;
 }
