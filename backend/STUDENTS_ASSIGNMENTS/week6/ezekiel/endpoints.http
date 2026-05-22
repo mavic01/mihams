@@ -1,0 +1,19 @@
+POST http://localhost:3000/books
+Content-Type: application/json
+{
+    "bookName": "FAITHs",
+    "author": "Fatima Amin"
+}
+
+
+PATCH http://localhost:3000/books/2
+Content-Type: application/json
+{
+    "bookName": "FAITH",
+    "author": "Fatima Aminu"
+}
+
+
+DELETE http://localhost:3000/books/2
+
+GET http://localhost:3000/books
