@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './users.entity';
 
@@ -10,9 +10,10 @@ import { CreateUserProvider } from './providers/create-user.provider';
 import { UpdateUserProvider } from './providers/update-user.provider';
 import { DeleteUserProvider } from './providers/delete-user.provider';
 import { FindOneByEmailProvider } from './providers/find-one-by-email.provider';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Users])],
+  imports: [TypeOrmModule.forFeature([Users]), forwardRef(() => AuthModule)],
 
   controllers: [UsersController],
 

@@ -14,10 +14,12 @@ export class FindOneByEmailProvider {
   ) {}
 
   public async findOneByEmail(email: string) {
-    return await this.usersRepository.findOne({
+    let user = await this.usersRepository.findOne({
       where: {
         email,
       },
     });
+
+    return user
   }
 }

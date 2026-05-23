@@ -8,12 +8,16 @@ import { Repository } from 'typeorm';
 
 import { Users } from '../users.entity';
 import { CreateUserDto } from '../dto/create-user.dto';
+import { HashingProvider } from 'src/auth/providers/hashing-provider';
 
 @Injectable()
 export class CreateUserProvider {
   constructor(
     @InjectRepository(Users)
     private readonly usersRepository: Repository<Users>,
+
+    // hint: use fowardRef to take care of circular dependency
+    private readonly hashingProvider: HashingProvider
   ) {}
 
   public async createUser(
@@ -33,11 +37,14 @@ export class CreateUserProvider {
       );
     }
 
+    const hashedPassword = await this.hashingProvider.hashPassword(createUserDto.password)
+
     // CREATE USER
     const newUser =
-      this.usersRepository.create(
-        createUserDto,
-      );
+      this.usersRepository.create({
+        ...createUserDto,
+        password: hashedPassword
+      });
 
     // SAVE USER
     await this.usersRepository.save(

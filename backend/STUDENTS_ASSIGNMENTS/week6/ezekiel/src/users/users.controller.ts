@@ -51,4 +51,7 @@ export class UsersController {
   ) {
     return this.usersService.deleteUser(id);
   }
+
+  // @Get()
+  // find one by email
 }

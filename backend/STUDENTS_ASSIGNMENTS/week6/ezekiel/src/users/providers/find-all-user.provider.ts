@@ -14,6 +14,8 @@ export class FindAllUserProvider {
   ) {}
 
   public findAllUsers() {
-    return this.usersRepository.find();
+    return this.usersRepository.find({
+      relations: ['books']
+    });
   }
 }
