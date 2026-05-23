@@ -28,12 +28,20 @@ export class UsersService {
 
   // CREATE USER
   public createUser(createUserDto: CreateUserDto) {
-    return this.createUserProvider.createUser(createUserDto);
+    return this.createUserProvider.createUser(
+      createUserDto,
+    );
   }
 
   // UPDATE USER
-  public updateUser(id: number, updateUserDto: UpdateUserDto) {
-    return this.updateUserProvider.updateUser(id, updateUserDto);
+  public updateUser(
+    id: number,
+    updateUserDto: UpdateUserDto,
+  ) {
+    return this.updateUserProvider.updateUser(
+      id,
+      updateUserDto,
+    );
   }
 
   // DELETE USER
@@ -43,6 +51,8 @@ export class UsersService {
 
   // FIND USER BY EMAIL
   public findByEmail(email: string) {
-    return this.findOneByEmailProvider.findOneByEmail(email);
+    return this.findOneByEmailProvider.findOneByEmail(
+      email,
+    );
   }
 }
