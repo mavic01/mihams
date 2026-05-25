@@ -52,6 +52,8 @@ export class UsersController {
     return this.usersService.deleteUser(id);
   }
 
-  // @Get()
-  // find one by email
+  @Get('email/:email')
+  public findOneByEmail(@Param('email') email: string) {
+    return this.usersService.findByEmail(email);
+  }
 }

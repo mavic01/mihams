@@ -1,6 +1,65 @@
-POST http://localhost:5000/
-Content-Type: 'application/json'
+POST http://localhost:3000/books
+Content-Type: application/json
 {
-    "a": 4,
-    "b": 4
+    "bookName": "FAITHs",
+    "author": "Fatima Amin",
+    "userId": 5
+}
+
+PATCH http://localhost:3000/books/7
+Content-Type: application/json
+{
+    "bookName": "FAITH",
+    "author": "Fatima Aminu"
+}
+
+
+DELETE http://localhost:3000/books/2
+
+GET http://localhost:3000/books
+
+
+
+#################################################### 
+
+GET http://localhost:3000/users
+
+####################################################
+
+POST http://localhost:3000/auth
+Content-Type: application/json
+{
+  "email": "victor@email.com",
+  "password": "password"
+}
+
+GET http://localhost:3000/users/email/victor@email.com
+
+
+DELETE http://localhost:3000/users/6
+
+
+POST http://localhost:3000/users
+Content-Type: application/json
+{
+    "firstname": "Victor",
+    "lastname": "Iberi",
+    "email": "victor@email.com",
+    "password": "password"
+}
+
+PATCH http://localhost:3000/users/3
+Content-Type: application/json
+{
+    "firstname": "Fatima",
+    "lastname": "Aminu",
+    "email": "aminubabafatima@email.com"
+}
+
+
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+{
+    "email": "aminubabafatima2@email.com",
+    "password": "password"
 }
