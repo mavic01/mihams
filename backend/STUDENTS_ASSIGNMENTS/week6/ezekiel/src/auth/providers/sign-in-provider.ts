@@ -19,9 +19,11 @@ export class SignInProvider {
     private readonly generateTokensProvider: GenerateTokensProvider,
   ) {}
 
-  public signIn(signInDto: SignInDto) {
-    // Check if user exit
-    const user = this.userService.findByEmail(signInDto.email);
+  public async signIn(signInDto: SignInDto) {
+    // Check if user exists
+    const user = await this.userService.findByEmail(
+      signInDto.email,
+    );
 
     if (!user) {
       throw new UnauthorizedException(
@@ -29,17 +31,22 @@ export class SignInProvider {
       );
     }
 
-    // Compare the user password
-    let isComparePassword = false;
+    // Compare passwords
+    const isComparePassword =
+      await this.hashingProvider.comparePassword(
+        signInDto.password,
+        user.password,
+      );
 
-    try {
-      isComparePassword = this.hashingProvider.comparePassword(signInDto.password, user.);
-    } catch (error) {
-      throw new UnauthorizedException();
+    if (!isComparePassword) {
+      throw new UnauthorizedException(
+        'Email or password is incorrect',
+      );
     }
 
-    // generate tokens
-
-    return await this.generateTokensProvider.generateToken(user)
+    // Generate tokens
+    return await this.generateTokensProvider.generateToken(
+      user,
+    );
   }
 }
