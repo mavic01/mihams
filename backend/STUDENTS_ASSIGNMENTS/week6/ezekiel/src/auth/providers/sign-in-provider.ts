@@ -15,15 +15,20 @@ import { GenerateTokensProvider } from './generate-tokens-provider';
 export class SignInProvider {
   constructor(
     private readonly userService: UsersService,
+
     private readonly hashingProvider: HashingProvider,
+
     private readonly generateTokensProvider: GenerateTokensProvider,
   ) {}
 
-  public async signIn(signInDto: SignInDto) {
-    // Check if user exists
-    const user = await this.userService.findByEmail(
-      signInDto.email,
-    );
+  public async signIn(
+    signInDto: SignInDto,
+  ) {
+    // CHECK IF USER EXISTS
+    const user =
+      await this.userService.findByEmail(
+        signInDto.email,
+      );
 
     if (!user) {
       throw new UnauthorizedException(
@@ -31,7 +36,7 @@ export class SignInProvider {
       );
     }
 
-    // Compare passwords
+    // COMPARE PASSWORD
     const isComparePassword =
       await this.hashingProvider.comparePassword(
         signInDto.password,
@@ -44,7 +49,7 @@ export class SignInProvider {
       );
     }
 
-    // Generate tokens
+    // GENERATE TOKEN
     return await this.generateTokensProvider.generateToken(
       user,
     );

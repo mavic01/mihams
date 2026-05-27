@@ -4,9 +4,15 @@ import { SignInDto } from './signInDto';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly signInProvider: SignInProvider) {}
+  constructor(
+    private readonly signInProvider: SignInProvider,
+  ) {}
 
-  public async signIn(signInDto: SignInDto) {
-    return this.signInProvider.signIn(signInDto);
+  public async signIn(
+    signInDto: SignInDto,
+  ) {
+    return this.signInProvider.signIn(
+      signInDto,
+    );
   }
 }

@@ -5,6 +5,7 @@ import { Users } from 'src/users/users.entity';
 @Injectable()
 export class GenerateTokensProvider {
   constructor(private readonly jwtService: JwtService) {}
+
   public async signInToken<T>(
     userId: number,
     firstname: string,
@@ -13,25 +14,30 @@ export class GenerateTokensProvider {
     payload: T,
   ) {
     return await this.jwtService.signAsync(
-      { sub: userId, firstname, lastname, ...payload },
       {
-        secret: process.env.JWT_SECRET,
-        audience: process.env.JWT_SECRET,
-        issuer: process.env.JWT_ISSUER,
-        expiresIn,
+        sub: userId,
+        firstname,
+        lastname,
+        ...payload,
+      },
+      {
+        secret: process.env.JWT_SECRET || 'supersecretkey',
+        issuer: process.env.JWT_ISSUER || 'getchange',
+        expiresIn: `${expiresIn}s`,
       },
     );
   }
-
   public async generateToken(user: Users) {
-
-    const ttl = parseInt(process.env.TTL ?? "3000")
-
-    const [accessToken] =  await Promise.all([
-        this.signInToken(user.id, user.firstname, user.lastname, ttl, {user: user.email})
-
-    ])
-
-    return {accessToken, user}
+    const ttl = Number(process.env.TTL) || 3000;
+    const accessToken = await this.signInToken(
+      user.id,
+      user.firstname,
+      user.lastname,
+      ttl,
+      {
+        user: user.email,
+      },
+    );
+    return accessToken;
   }
 }
