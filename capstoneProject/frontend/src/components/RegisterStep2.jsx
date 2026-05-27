@@ -17,7 +17,7 @@ const RegisterStep2 = ({ step, setStep, formData, handleChange }) => {
               placeholder="Josh Bakery Ventures"
               className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"
             />
-            {/* <div className="absolute right-4 top-1/2 -translate-y-1/2">  */}
+
             <div className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer">
               <img
                 src="./SignupOffice.png"
@@ -82,37 +82,6 @@ const RegisterStep2 = ({ step, setStep, formData, handleChange }) => {
           </button>
         </div>
       </div>
-
-      {/* <div className="space-y-4">
-        <input
-          name="businessName"
-          value={formData.businessName}
-          onChange={handleChange}
-          placeholder="Business Name"
-          className="w-full border-b p-2"
-        />
-        <input
-          name="businessAddress"
-          value={formData.businessAddress}
-          onChange={handleChange}
-          placeholder="Business Address"
-          className="w-full border-b p-2"
-        />
-        <input
-          name="phoneNumber"
-          value={formData.phoneNumber}
-          onChange={handleChange}
-          placeholder="Phone Number"
-          className="w-full border-b p-2"
-        />
-        <button
-          type="button"
-          onClick={() => setStep(3)}
-          className="bg-green-500 text-white px-6 py-2 ml-auto block"
-        >
-          Finish
-        </button>
-      </div> */}
     </div>
   );
 };

@@ -74,19 +74,20 @@ const Register = () => {
           </p>
 
           {/* STEPS */}
-          <RegisterStep1
-            step={step}
-            setStep={setStep}
-            formData={formData}
-            handleChange={handleChange}
-          />
-
-          <RegisterStep2
-            step={step}
-            setStep={setStep}
-            formData={formData}
-            handleChange={handleChange}
-          />
+          <form action="">
+            <RegisterStep1
+              step={step}
+              setStep={setStep}
+              formData={formData}
+              handleChange={handleChange}
+            />
+            <RegisterStep2
+              step={step}
+              setStep={setStep}
+              formData={formData}
+              handleChange={handleChange}
+            />
+          </form>
 
           <RegisterStep3 step={step} formData={formData} />
         </div>
