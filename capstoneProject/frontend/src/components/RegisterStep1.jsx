@@ -3,7 +3,7 @@ const RegisterStep1 = ({ step, setStep, formData, handleChange }) => {
 
   return (
     <div className="w-full max-w-md bg-white p-10 rounded-lg shadow-sm">
-        <div className="space-y-4">
+        <div className="space-y-2">
           {/* <!-- First Name & Last Name --> */}
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -14,6 +14,7 @@ const RegisterStep1 = ({ step, setStep, formData, handleChange }) => {
                 <input
                   onChange={handleChange}
                   value={formData.firstName}
+                  name="firstName"
                   type="text"
                   placeholder="Joshua"
                   className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"
@@ -35,6 +36,7 @@ const RegisterStep1 = ({ step, setStep, formData, handleChange }) => {
                 <input
                   onChange={handleChange}
                   value={formData.lastName}
+                  name="lastName"
                   type="text"
                   placeholder="Bakare"
                   className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"
@@ -58,6 +60,7 @@ const RegisterStep1 = ({ step, setStep, formData, handleChange }) => {
               <input
                 onChange={handleChange}
                 value={formData.email}
+                name="email"
                 type="email"
                 placeholder="josh.bakery@gmail.com"
                 className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"
@@ -80,6 +83,7 @@ const RegisterStep1 = ({ step, setStep, formData, handleChange }) => {
               <input
                 onChange={handleChange}
                 value={formData.password}
+                name="password"
                 type="password"
                 placeholder="*************"
                 className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"

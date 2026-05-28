@@ -3,7 +3,7 @@ const RegisterStep2 = ({ step, setStep, formData, handleChange }) => {
 
   return (
     <div className="w-full max-w-md bg-white p-10 rounded-lg shadow-sm">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col space-y-2">
         {/* <!-- Business Name --> */}
         <div>
           <label className="block text-sm text-[#6A7E8A] font-sf font-normal mb-1">
@@ -13,7 +13,8 @@ const RegisterStep2 = ({ step, setStep, formData, handleChange }) => {
             <input
               value={formData.businessName}
               onChange={handleChange}
-              type="email"
+              name="businessName"
+              type="text"
               placeholder="Josh Bakery Ventures"
               className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"
             />
@@ -36,6 +37,7 @@ const RegisterStep2 = ({ step, setStep, formData, handleChange }) => {
             <input
               value={formData.businessAddress}
               onChange={handleChange}
+              name="businessAddress"
               type="text"
               placeholder="62, Bode Thomas, Surulere, Lagos"
               className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"
@@ -59,6 +61,7 @@ const RegisterStep2 = ({ step, setStep, formData, handleChange }) => {
             <input
               value={formData.phoneNumber}
               onChange={handleChange}
+              name="phoneNumber"
               type="text"
               placeholder="+2348012345678"
               className="w-full px-2 py-3 border-b border-gray-300 rounded-sm focus:outline-none focus:border-gray-400 text-gray-800"
