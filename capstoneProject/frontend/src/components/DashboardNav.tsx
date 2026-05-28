@@ -3,7 +3,7 @@ const navDownArrow = "./dashboard-downArrow.png"
 
 const DashboardNav = () => {
   return (
-    <nav className="flex items-center justify-between p-6">
+    <nav className="flex items-center justify-between p-6 sticky top-0 bg-white z-50 shadow-xs">
         <img className="h-10" src={navLogo} alt="Dashboard Logo" />
         <div className="flex items-center gap-2">
             <span className="w-[35px] h-[35px] rounded-full bg-[#6A7E8A]"></span>

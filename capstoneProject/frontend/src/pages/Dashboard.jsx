@@ -8,7 +8,7 @@ const Dashboard = () => {
     <div>
         <DashboardNav />
         {/* main content */}
-        <div className="grid grid-cols-1 lg:grid-cols-[80px_1fr_320px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[80px_1fr_320px] gap-4 p-2 lg:p-4">
           <DashboardSidebarPanel />
           <DashboardMainContent />
           <DashoardWidgetPanel />
