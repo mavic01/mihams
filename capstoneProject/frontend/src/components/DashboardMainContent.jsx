@@ -6,12 +6,12 @@ const centerDashArrowRight = "./centerDashArrowRight.png";
 
 const DashboardMainContent = () => {
   const [topUpModal, setTopUpModal] = useState(false);
-
+  
   return (
-    <section className="bg-[#F6F8F8] p-4 lg:p-8">
+    <section className="bg-[#F6F8F8] px-4 lg:p-8">
       {/* MODAL */}
       {topUpModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-[#1B2420]/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white p-5 rounded-lg shadow-lg w-full max-w-sm">
             <h2 className="text-xl font-semibold mb-4">Top Up Wallet</h2>
 
